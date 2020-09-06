@@ -26,10 +26,17 @@ const ExpenseForm = (props) => {
   const [date, setDate] = useState(null);
   const [amount, setAmount] = useState(null);
 
+  const resetClose = () => {
+    setDescription('');
+    setAmount(null);
+    setDate(null);
+    setModal(false);
+  };
+
   useEffect(() => {
     if (addExpenseStatus === 'SUCCESS') {
       dispatch({ type: 'ADD_EXPENSE_RESET' });
-      setModal(false);
+      resetClose();
     }
   }, [addExpenseStatus]);
 
@@ -121,9 +128,9 @@ const ExpenseForm = (props) => {
           </ModalBody>
           <ModalFooter>
             <Button type='submit' color='primary'>
-              Add
+              {props.exp ? 'Edit' : 'Add'}
             </Button>{' '}
-            <Button color='secondary' onClick={toggle}>
+            <Button color='secondary' onClick={resetClose}>
               Cancel
             </Button>
           </ModalFooter>
