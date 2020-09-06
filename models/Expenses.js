@@ -2,24 +2,24 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // Create Schema
-const UserSchema = new Schema({
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
+const ExpenseSchema = new Schema({
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'users',
     required: true,
   },
-  mobileNumber: {
+  description: {
+    type: String,
+    required: true,
+  },
+  amount: {
     type: Number,
     required: true,
   },
   date: {
     type: Date,
-    default: Date.now,
+    required: true,
   },
 });
 
-module.exports = Users = mongoose.model('Users', UserSchema);
+module.exports = Expenses = mongoose.model('Expenses', ExpenseSchema);

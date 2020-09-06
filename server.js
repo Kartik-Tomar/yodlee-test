@@ -1,11 +1,12 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const path = require("path");
+const express = require('express');
+const bodyParser = require('body-parser');
+const path = require('path');
 
-const mongoose = require("./config/mongo-database");
+const mongoose = require('./config/mongo-database');
 
 // Route
-const users = require("./routes/api/users");
+const users = require('./routes/api/users');
+const expenses = require('./routes/api/expenses');
 
 const app = express();
 
@@ -13,14 +14,15 @@ const app = express();
 app.use(bodyParser.json());
 
 // Use Route
-app.use("/api/users", users);
+app.use('/api/users', users);
+app.use('/api/expenses', expenses);
 
 // Server Static assets if in production
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === 'production') {
   // Set a static folder
-  app.use(express.static("client/build"));
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+  app.use(express.static('client/build'));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
   });
 }
 
