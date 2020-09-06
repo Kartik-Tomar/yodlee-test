@@ -15,18 +15,16 @@ const LandingPage = (props) => {
     }
   }, [isAuthenticated]);
   return (
-    <div>
-      <Container>
-        <Row>
-          <Col md='6'>
-            <SignUp />
-          </Col>
-          <Col>
-            <Login />
-          </Col>
-        </Row>
-      </Container>
-    </div>
+    <Container>
+      <Row>
+        <Col md='6'>
+          <SignUp />
+        </Col>
+        <Col>
+          <Login />
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

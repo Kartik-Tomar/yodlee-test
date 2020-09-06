@@ -12,7 +12,6 @@ import { loadUser } from './redux/actions/auth';
 
 const App = () => {
   useEffect(() => {
-    console.log(localStorage.token);
     if (localStorage.token) {
       axios.defaults.headers.common['Authorization'] = localStorage.token;
     } else {

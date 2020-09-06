@@ -101,23 +101,15 @@ router.put(
 // @route     DELETE api/expenses
 // @desc      Get all expense of the user
 // @access    Private
-router.delete(
-  '/',
-  [auth, [body('id', 'ID is required').not().isEmpty()]],
-  (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-    const { id } = req.body;
-    Expenses.findByIdAndDelete({ _id: id })
-      .then((response) => {
-        res.json(response);
-      })
-      .catch((err) =>
-        res.status(500).json({ error: 'Server Error', message: err.message })
-      );
-  }
-);
+router.delete('/', (req, res) => {
+  const id = req.query.id;
+  Expenses.findByIdAndDelete({ _id: id })
+    .then((response) => {
+      res.json(response);
+    })
+    .catch((err) =>
+      res.status(500).json({ error: 'Server Error', message: err.message })
+    );
+});
 
 module.exports = router;
