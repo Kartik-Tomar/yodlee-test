@@ -27,9 +27,15 @@ const ExpenseForm = (props) => {
   const [amount, setAmount] = useState(null);
 
   const resetClose = () => {
-    setDescription('');
-    setAmount(null);
-    setDate(null);
+    if (props.exp) {
+      setDescription(props.exp.description);
+      setAmount(props.exp.amount);
+      setDate(props.exp.date.slice(0, 10));
+    } else {
+      setDescription('');
+      setAmount(null);
+      setDate(null);
+    }
     setModal(false);
   };
 
