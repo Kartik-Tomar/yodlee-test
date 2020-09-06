@@ -42,7 +42,7 @@ router.post(
       if (user) {
         return res
           .status(400)
-          .json({ errors: [{ msg: 'User already exists' }] });
+          .json({ errors: [{ param: 'email', msg: 'User already exists' }] });
       }
 
       user = new Users({
@@ -102,15 +102,15 @@ router.post(
       if (!user) {
         return res
           .status(400)
-          .json({ errors: [{ msg: 'Invalid Credentials' }] });
+          .json({ errors: [{ param: 'email', msg: 'Email does not exists' }] });
       }
 
       // Match the password
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) {
-        return res
-          .status(400)
-          .json({ errors: [{ msg: 'Invalid Credentials' }] });
+        return res.status(400).json({
+          errors: [{ param: 'password', msg: 'Incorrect Password' }],
+        });
       }
 
       // return JWT

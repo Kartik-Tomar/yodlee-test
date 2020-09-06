@@ -110,7 +110,7 @@ router.delete(
       return res.status(400).json({ errors: errors.array() });
     }
     const { id } = req.body;
-    Expenses.remove({ _id: id })
+    Expenses.findByIdAndDelete({ _id: id })
       .then((response) => {
         res.json(response);
       })
